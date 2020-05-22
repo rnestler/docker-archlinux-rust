@@ -5,3 +5,5 @@ RUN pacman --noconfirm -Sy rustup gcc pkg-config \
 
 ARG RUST_VERSION=stable
 RUN rustup install --profile minimal $RUST_VERSION
+
+ENV PATH="/root/.cargo/bin:${PATH}"
