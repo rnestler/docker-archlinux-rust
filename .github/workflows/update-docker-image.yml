@@ -1,0 +1,23 @@
+name: Publish Docker
+
+on: [push]
+
+#  push:
+#    branches:
+#      - master
+#  schedule:
+#    - cron: '0 2 * * 0'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: Docker Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: rnestler/archlinux-rust
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          tags: "latest"

@@ -1,0 +1,11 @@
+name: Kaniko build
+on: [push]
+jobs:
+  kaniko-build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pull kaniko image
+        run: docker pull gcr.io/kaniko-project/executor:latest
+      - name: Run kaniko
+        run: docker run -v $PWD:/workspace gcr.io/kaniko-project/executor:latest --dockerfile /workspace/Dockerfile --no-push
