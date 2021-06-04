@@ -1,0 +1,12 @@
+name: Docker build
+on: [push]
+jobs:
+  docker-build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        rust_version: [beta, nightly, stable]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build --build-arg RUST_VERSION="${{matrix.rust_version}}" -t "rnestler/archlinux-rust:${{matrix.rust_version}}" .
