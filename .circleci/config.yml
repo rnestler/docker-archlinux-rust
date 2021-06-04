@@ -1,0 +1,36 @@
+version: 2
+jobs:
+
+  build:
+    docker:
+      - image: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+        command: 'sh -c "mkdir /bin && cp /busybox/sh /bin && /bin/sh"'
+    steps:
+      - run: checkout
+      - run: pwd
+      - run: ls
+      - run:
+          name: Build
+          command: kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --no-push
+
+
+workflows:
+  version: 2
+
+  # Build on push
+  on_push:
+    jobs:
+      - build
+
+  # Build master every week on Monday at 04:00 am
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 4 * * 1"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
