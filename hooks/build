@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for RUST_VERSION in $RUST_VERSIONS; do
-    docker build --build-arg RUST_VERSION="$RUST_VERSION" -f "$DOCKERFILE_PATH" -t "$DOCKER_REPO:$RUST_VERSION" .
-done
