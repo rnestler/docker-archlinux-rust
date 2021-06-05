@@ -1,0 +1,28 @@
+name: Publish Docker
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 2 * * 0'
+
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    environment: Docker Deploy
+    env:
+      DOCKER_REPO: "rnestler/archlinux-rust"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: ./build.sh 1.50.0 1.51.0 1.52.0 1.52.1 beta nightly stable
+      - name: Tag stable as latest
+        run: docker tag "$DOCKER_REPO":stable "$DOCKER_REPO":latest
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Push all tags
+        run: ./push.sh 1.50.0 1.51.0 1.52.0 1.52.1 beta nightly stable latest

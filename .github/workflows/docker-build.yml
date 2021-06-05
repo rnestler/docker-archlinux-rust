@@ -1,0 +1,11 @@
+name: Docker build
+on: [push]
+jobs:
+  docker-build:
+    runs-on: ubuntu-20.04
+    env:
+      DOCKER_REPO: "rnestler/archlinux-rust"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: ./build.sh beta nightly stable

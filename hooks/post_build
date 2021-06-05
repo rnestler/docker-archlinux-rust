@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# tag the stable image as latest
-docker tag "$DOCKER_REPO":stable "$IMAGE_NAME"
