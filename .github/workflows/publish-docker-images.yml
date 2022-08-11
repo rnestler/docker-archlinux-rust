@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Push all tags
-        run: ./push.sh 1.61.0 1.62.0 1.62.1 1.63.0 beta nightly stable latest
+        run: ./push.sh 1.62.0 1.62.1 1.63.0 beta nightly stable latest
