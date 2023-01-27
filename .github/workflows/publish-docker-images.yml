@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     environment: Docker Deploy
     env:
       DOCKER_REPO: "rnestler/archlinux-rust"
