@@ -15,7 +15,7 @@ new_version="$1"
 
 [[ "$new_version" =~ $VERSION_REGEX ]] || die "Invalid version $new_version"
 
-git switch "bump-versions-to-include-$1"
+git switch -c "bump-versions-to-include-$1"
 
 sed -i -E "s/($VERSION_REGEX) ($VERSION_REGEX) ($VERSION_REGEX)/\\2 \\3 $new_version/g" .github/workflows/publish-docker-images.yml
 
