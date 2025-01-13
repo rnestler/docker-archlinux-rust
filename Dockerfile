@@ -7,11 +7,8 @@ RUN pacman --noconfirm -Sy rustup gcc pkg-config sudo \
 RUN  useradd -m builder \
   && echo "builder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/builder
 
-USER builder
-WORKDIR /home/builder
-
 ARG RUST_VERSION=stable
 RUN rustup install --profile minimal $RUST_VERSION
 
-ENV PATH="/home/builder/.cargo/bin:${PATH}"
-ENV RUSTUP_HOME="/home/builder/.rustup"
+ENV PATH="/root/.cargo/bin:${PATH}"
+ENV RUSTUP_HOME="/root/.rustup"
