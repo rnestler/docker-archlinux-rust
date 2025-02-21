@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker image
-        run: ./build.sh 1.83.0 1.84.0 1.84.1 beta nightly stable
+        run: ./build.sh 1.84.0 1.84.1 1.85.0 beta nightly stable
       - name: Tag stable as latest
         run: docker tag "$DOCKER_REPO":stable "$DOCKER_REPO":latest
       - name: Login to Docker Hub
@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Push all tags
-        run: ./push.sh 1.83.0 1.84.0 1.84.1 beta nightly stable latest
+        run: ./push.sh 1.84.0 1.84.1 1.85.0 beta nightly stable latest
