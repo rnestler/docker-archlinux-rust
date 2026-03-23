@@ -14,7 +14,7 @@ jobs:
     env:
       DOCKER_REPO: "rnestler/archlinux-rust"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Build Docker image
         run: ./build.sh 1.93.0 1.93.1 1.94.0 beta nightly stable
       - name: Tag stable as latest
