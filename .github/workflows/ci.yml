@@ -4,7 +4,7 @@ jobs:
   shellcheck:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Run shellcheck
         run: shellcheck *.sh
 
